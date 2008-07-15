@@ -1,0 +1,11 @@
+Build.PL
+coderefs.pl
+lib/Devel/Refcount.pm
+lib/Devel/Refcount.xs
+MANIFEST			This list of files
+t/00use.t
+t/01refs.t
+t/02objects.t
+t/03fail.t
+Makefile.PL
+META.yml
