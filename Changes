@@ -1,0 +1,12 @@
+Revision history for Devel-Refcount
+
+0.02    BUGFIXES:
+         * Make sure Regexp refs have count 1 even on perl 5.11, which seems
+           to share references
+
+        CHANGES:
+         * Expanded documentation about the difference between refcount() and
+           Devel::Peek::SvREFCNT().
+
+0.01    First version, released on an unsuspecting world.
+

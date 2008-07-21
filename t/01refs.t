@@ -16,7 +16,7 @@ my %refs = (
    # it has to contain a unique pad.
    CODE   => do { my $var; sub { $var } },
    GLOB   => gensym(),
-   Regex  => qr/foo/,
+   Regex  => do { my $var; qr/foo(?{ $var = 1 })/ },
 );
 
 is( refcount($refs{SCALAR}), 1, 'refcount(SCALAR) is 1');
