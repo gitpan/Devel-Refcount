@@ -9,6 +9,7 @@ my $build = Module::Build->new
    requires => {
    },
    build_requires => {
+                        'ExtUtils::CBuilder' => 0,
                         'Test::Exception' => 0,
                         'Test::More' => 0,
                      },

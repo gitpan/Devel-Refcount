@@ -1,5 +1,9 @@
 Revision history for Devel-Refcount
 
+0.03    BUGFIXES:
+         * TEMPORARY workaround for bleadperl's behaviour on Regexp references
+         * Declare dependence on ExtUtils::CBuilder
+
 0.02    BUGFIXES:
          * Make sure Regexp refs have count 1 even on perl 5.11, which seems
            to share references

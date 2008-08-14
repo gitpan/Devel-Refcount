@@ -7,7 +7,7 @@ use base qw( DynaLoader );
 
 our @EXPORT_OK = qw( refcount );
 
-our $VERSION = "0.02";
+our $VERSION = "0.03";
 
 __PACKAGE__->bootstrap( $VERSION );
 
@@ -49,7 +49,7 @@ Returns the reference count of the object being pointed to by $ref.
 This function differs from C<Devel::Peek::SvREFCNT> in that SvREFCNT() gives
 the reference count of the SV object itself that it is passed, whereas
 refcount() gives the count of the object being pointed to. This allows it to
-give the count of any referent (i.e. ARRAY, HASH, CODE, GLOB and Regex types)
+give the count of any referent (i.e. ARRAY, HASH, CODE, GLOB and Regexp types)
 as well.
 
 Consider the following example program:
