@@ -7,7 +7,7 @@ use base qw( DynaLoader );
 
 our @EXPORT_OK = qw( refcount );
 
-our $VERSION = "0.03";
+our $VERSION = '0.04';
 
 __PACKAGE__->bootstrap( $VERSION );
 
