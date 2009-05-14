@@ -1,13 +1,19 @@
+#  You may distribute under the terms of either the GNU General Public License
+#  or the Artistic License (the same terms as Perl itself)
+#
+#  (C) Paul Evans, 2008 -- leonerd@leonerd.org.uk
+
 package Devel::Refcount;
 
 use strict;
+use warnings;
 
 use base qw( Exporter );
 use base qw( DynaLoader );
 
 our @EXPORT_OK = qw( refcount );
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 __PACKAGE__->bootstrap( $VERSION );
 
@@ -109,6 +115,5 @@ anonymous CODE block.
 __END__
 
 =head1 AUTHOR
-
 
 Paul Evans E<lt>leonerd@leonerd.org.ukE<gt>

@@ -1,5 +1,9 @@
 Revision history for Devel-Refcount
 
+0.05    CHANGES:
+         * use warnings
+         * Added (C) declaration to main file
+
 0.04    BUGFIXES:
          * Declare ExtUtils::CBuilder and Module::Build as configure_requires
 

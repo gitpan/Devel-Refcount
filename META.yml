@@ -1,6 +1,6 @@
 ---
 name: Devel-Refcount
-version: 0.04
+version: 0.05
 author:
   - 'Paul Evans E<lt>leonerd@leonerd.org.ukE<gt>'
 abstract: obtain the REFCNT value of a referent
@@ -18,8 +18,8 @@ build_requires:
 provides:
   Devel::Refcount:
     file: lib/Devel/Refcount.pm
-    version: 0.04
-generated_by: Module::Build version 0.280801
+    version: 0.05
+generated_by: Module::Build version 0.3
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.2.html
   version: 1.2
