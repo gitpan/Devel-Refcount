@@ -1,8 +1,8 @@
 ---
 name: Devel-Refcount
-version: 0.05
+version: 0.06
 author:
-  - 'Paul Evans E<lt>leonerd@leonerd.org.ukE<gt>'
+  - 'Paul Evans <leonerd@leonerd.org.uk>'
 abstract: obtain the REFCNT value of a referent
 license: perl
 resources:
@@ -18,8 +18,8 @@ build_requires:
 provides:
   Devel::Refcount:
     file: lib/Devel/Refcount.pm
-    version: 0.05
-generated_by: Module::Build version 0.3
+    version: 0.06
+generated_by: Module::Build version 0.33
 meta-spec:
-  url: http://module-build.sourceforge.net/META-spec-v1.2.html
-  version: 1.2
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4

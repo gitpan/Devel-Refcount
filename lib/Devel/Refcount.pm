@@ -1,7 +1,7 @@
 #  You may distribute under the terms of either the GNU General Public License
 #  or the Artistic License (the same terms as Perl itself)
 #
-#  (C) Paul Evans, 2008 -- leonerd@leonerd.org.uk
+#  (C) Paul Evans, 2008,2009 -- leonerd@leonerd.org.uk
 
 package Devel::Refcount;
 
@@ -13,7 +13,7 @@ use base qw( DynaLoader );
 
 our @EXPORT_OK = qw( refcount );
 
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
 __PACKAGE__->bootstrap( $VERSION );
 
@@ -114,6 +114,16 @@ anonymous CODE block.
 
 __END__
 
+=head1 SEE ALSO
+
+=over 4
+
+=item *
+
+L<Test::Refcount> - assert reference counts on objects
+
+=back
+
 =head1 AUTHOR
 
-Paul Evans E<lt>leonerd@leonerd.org.ukE<gt>
+Paul Evans <leonerd@leonerd.org.uk>
