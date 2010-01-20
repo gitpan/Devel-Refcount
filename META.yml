@@ -1,25 +1,27 @@
 ---
-name: Devel-Refcount
-version: 0.06
+abstract: 'obtain the REFCNT value of a referent'
 author:
   - 'Paul Evans <leonerd@leonerd.org.uk>'
-abstract: obtain the REFCNT value of a referent
-license: perl
-resources:
-  license: http://dev.perl.org/licenses/
-configure_requires:
-  ExtUtils::CBuilder: 0
-  Module::Build: 0
 build_requires:
   ExtUtils::CBuilder: 0
   Module::Build: 0
   Test::Exception: 0
   Test::More: 0
-provides:
-  Devel::Refcount:
-    file: lib/Devel/Refcount.pm
-    version: 0.06
-generated_by: Module::Build version 0.33
+configure_requires:
+  ExtUtils::CBuilder: 0
+  Module::Build: 0
+generated_by: 'Module::Build version 0.3601'
+license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
   version: 1.4
+name: Devel-Refcount
+provides:
+  Devel::Refcount:
+    file: lib/Devel/Refcount.pm
+    version: 0.07
+requires:
+  XSLoader: 0
+resources:
+  license: http://dev.perl.org/licenses/
+version: 0.07

@@ -31,27 +31,27 @@ COMPARISON WITH SvREFCNT
 
      use Devel::Peek qw( SvREFCNT );
      use Devel::Refcount qw( refcount );
-     
- sub printcount
+ 
+     sub printcount
      {
         my $name = shift;
-     
-    printf "%30s has SvREFCNT=%d, refcount=%d\n",
+ 
+        printf "%30s has SvREFCNT=%d, refcount=%d\n",
            $name, SvREFCNT($_[0]), refcount($_[0]);
      }
-     
- my $var = [];
+ 
+     my $var = [];
 
      printcount 'Initially, $var', $var;
-     
- my $othervar = $var;
+ 
+     my $othervar = $var;
 
      printcount 'Before CODE ref, $var', $var;
      printcount '$othervar', $othervar;
-     
- my $code = sub { undef $var };
-     
- printcount 'After CODE ref, $var', $var;
+ 
+     my $code = sub { undef $var };
+ 
+     printcount 'After CODE ref, $var', $var;
      printcount '$othervar', $othervar;
 
     This produces the output

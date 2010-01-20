@@ -1,21 +1,20 @@
 #  You may distribute under the terms of either the GNU General Public License
 #  or the Artistic License (the same terms as Perl itself)
 #
-#  (C) Paul Evans, 2008,2009 -- leonerd@leonerd.org.uk
+#  (C) Paul Evans, 2008-2010 -- leonerd@leonerd.org.uk
 
 package Devel::Refcount;
 
 use strict;
 use warnings;
 
-use base qw( Exporter );
-use base qw( DynaLoader );
+our $VERSION = '0.07';
 
+use Exporter 'import';
 our @EXPORT_OK = qw( refcount );
 
-our $VERSION = '0.06';
-
-__PACKAGE__->bootstrap( $VERSION );
+require XSLoader;
+XSLoader::load( __PACKAGE__, $VERSION );
 
 =head1 NAME
 
