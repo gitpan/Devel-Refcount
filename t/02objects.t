@@ -34,7 +34,7 @@ SKIP: {
       # assumption. Until P5P have worked it out, we'll skip this, but just print
       # a diagnostic
       diag( "On Perl $], refcount(\$refs{Regexp}) is ".refcount($refs{Regexp}) );
-      skip "Bleadperl", 1;
+      # skip "Bleadperl", 1; # no skip for smoketest
    }
 
    is( refcount($refs{Regexp}), 1, 'refcount(Regexp) is 1');
@@ -56,7 +56,7 @@ SKIP: {
       # assumption. Until P5P have worked it out, we'll skip this, but just print
       # a diagnostic
       diag( "On Perl $], refcount(\$refs{Regexp}) is ".refcount($refs{Regexp}) );
-      skip "Bleadperl", 1;
+      # skip "Bleadperl", 1; # no skip for smoketest
    }
 
    is( refcount($refs{Regexp}),  2, 'refcount(Regexp) is now 2');

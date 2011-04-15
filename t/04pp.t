@@ -4,7 +4,10 @@ use strict;
 
 use Test::More tests => 12;
 
-use Devel::Refcount qw( refcount );
+# Some hackery to import the PP emulation
+require Devel::Refcount;
+require B;
+*refcount = \&Devel::Refcount::_refcount_pp;
 
 use Symbol qw( gensym );
 

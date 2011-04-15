@@ -76,6 +76,16 @@ COMPARISON WITH SvREFCNT
     SvREFCNT() of 2, because it also appears in the lexical pad for the new
     anonymous CODE block.
 
+PURE-PERL FALLBACK
+    An XS implementation of this function is provided, and is used by
+    default. If the XS library cannot be loaded, a fallback implementation
+    in pure perl using the "B" module is used instead. This will behave
+    identically, but is much slower.
+
+            Rate   pp   xs
+     pp 225985/s   -- -66%
+     xs 669570/s 196%   --
+
 SEE ALSO
     *   Test::Refcount - assert reference counts on objects
 

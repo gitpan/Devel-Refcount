@@ -1,20 +1,23 @@
 #  You may distribute under the terms of either the GNU General Public License
 #  or the Artistic License (the same terms as Perl itself)
 #
-#  (C) Paul Evans, 2008-2010 -- leonerd@leonerd.org.uk
+#  (C) Paul Evans, 2008-2011 -- leonerd@leonerd.org.uk
 
 package Devel::Refcount;
 
 use strict;
 use warnings;
 
-our $VERSION = '0.07';
+our $VERSION = '0.08_001';
 
 use Exporter 'import';
 our @EXPORT_OK = qw( refcount );
 
 require XSLoader;
-XSLoader::load( __PACKAGE__, $VERSION );
+if( !eval { XSLoader::load( __PACKAGE__, $VERSION ) } ) {
+   *refcount = \&_refcount_pp;
+   require B;
+}
 
 =head1 NAME
 
@@ -48,6 +51,12 @@ the object being pointed to by the passed reference value.
 Returns the reference count of the object being pointed to by $ref.
 
 =cut
+
+# This normally isn't used if the XS code is loaded
+sub _refcount_pp
+{
+   B::svref_2object( shift )->REFCNT;
+}
 
 =head1 COMPARISON WITH SvREFCNT
 
@@ -108,10 +117,16 @@ anonymous CODE block.
 
 =cut
 
-# Keep perl happy; keep Britain tidy
-1;
+=head1 PURE-PERL FALLBACK
 
-__END__
+An XS implementation of this function is provided, and is used by default. If
+the XS library cannot be loaded, a fallback implementation in pure perl using
+the C<B> module is used instead. This will behave identically, but is much
+slower.
+
+        Rate   pp   xs
+ pp 225985/s   -- -66%
+ xs 669570/s 196%   --
 
 =head1 SEE ALSO
 
@@ -126,3 +141,7 @@ L<Test::Refcount> - assert reference counts on objects
 =head1 AUTHOR
 
 Paul Evans <leonerd@leonerd.org.uk>
+
+=cut
+
+0x55AA;
