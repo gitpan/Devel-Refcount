@@ -18,9 +18,10 @@ name: Devel-Refcount
 provides:
   Devel::Refcount:
     file: lib/Devel/Refcount.pm
-    version: 0.08_001
+    version: 0.09
 requires:
+  Exporter: 5.57
   XSLoader: 0
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.08_001
+version: 0.09

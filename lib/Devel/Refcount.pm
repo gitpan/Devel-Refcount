@@ -8,7 +8,7 @@ package Devel::Refcount;
 use strict;
 use warnings;
 
-our $VERSION = '0.08_001';
+our $VERSION = '0.09';
 
 use Exporter 'import';
 our @EXPORT_OK = qw( refcount );

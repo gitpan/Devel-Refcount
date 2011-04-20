@@ -1,10 +1,12 @@
 Revision history for Devel-Refcount
 
-0.08_001 CHANGES:
+0.09    CHANGES:
          * Use Test::Fatal instead of Test::Exception
          * Provide fallback PP implementation using B
-         * Don't skip Regexp tests dependent on Perl version, for smoke
-           testing to see where it actually matters
+         * Don't skip Regexp tests dependent on Perl version since all stable
+           Perl releases are fine now
+
+(0.08 skipped because I messed up the alpha version numbering of 0.08_001. Oops).
 
 0.07    CHANGES:
          * Don't use base 'Exporter'

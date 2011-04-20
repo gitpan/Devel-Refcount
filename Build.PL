@@ -14,6 +14,7 @@ if( $build_xs and not ExtUtils::CBuilder->new->have_compiler ) {
 my $build = Module::Build->new(
    module_name => 'Devel::Refcount',
    requires => {
+      'Exporter' => '5.57',
       'XSLoader' => 0,
    },
    configure_requires => {
