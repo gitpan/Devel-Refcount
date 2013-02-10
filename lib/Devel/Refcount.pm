@@ -1,23 +1,26 @@
 #  You may distribute under the terms of either the GNU General Public License
 #  or the Artistic License (the same terms as Perl itself)
 #
-#  (C) Paul Evans, 2008-2011 -- leonerd@leonerd.org.uk
+#  (C) Paul Evans, 2008-2013 -- leonerd@leonerd.org.uk
 
 package Devel::Refcount;
 
 use strict;
 use warnings;
 
-our $VERSION = '0.09';
+our $VERSION = '0.10';
 
 use Exporter 'import';
-our @EXPORT_OK = qw( refcount );
+our @EXPORT_OK = qw( refcount assert_oneref );
 
 require XSLoader;
 if( !eval { XSLoader::load( __PACKAGE__, $VERSION ) } ) {
    *refcount = \&_refcount_pp;
    require B;
 }
+
+use Carp;
+use Scalar::Util qw( weaken );
 
 =head1 NAME
 
@@ -29,16 +32,19 @@ C<Devel::Refcount> - obtain the REFCNT value of a referent
 
  my $anon = [];
 
- print "Anon ARRAY $anon has " . refcount($anon) . " reference\n";
+ print "Anon ARRAY $anon has " . refcount( $anon ) . " reference\n";
 
  my $otherref = $anon;
 
- print "Anon ARRAY $anon now has " . refcount($anon) . " references\n";
+ print "Anon ARRAY $anon now has " . refcount( $anon ) . " references\n";
+
+ assert_oneref $otherref; # This will throw an exception at runtime
 
 =head1 DESCRIPTION
 
 This module provides a single function which obtains the reference count of
-the object being pointed to by the passed reference value.
+the object being pointed to by the passed reference value. It also provides a
+debugging assertion that asserts a given reference has a count of only 1.
 
 =cut
 
@@ -46,7 +52,7 @@ the object being pointed to by the passed reference value.
 
 =cut
 
-=head2 $count = refcount($ref)
+=head2 $count = refcount( $ref )
 
 Returns the reference count of the object being pointed to by $ref.
 
@@ -56,6 +62,46 @@ Returns the reference count of the object being pointed to by $ref.
 sub _refcount_pp
 {
    B::svref_2object( shift )->REFCNT;
+}
+
+=head2 assert_oneref( $ref )
+
+Asserts that the given object reference has a reference count of only 1. If
+this is true the function does nothing. If it has more than 1 reference then
+an exception is thrown. Additionally, if L<Devel::FindRef> is available, it
+will be used to print a more detailed trace of where the references are found.
+
+Typically this would be useful in debugging to track down cases where objects
+are still being referenced beyond the point at which they are supposed to be
+dropped. For example, if an element is delete from a hash that ought to be the
+last remaining reference, the return value of the C<delete> operator can be
+asserted on
+
+ assert_oneref delete $self->{some_item};
+
+If at the time of deleting there are any other references to this object then
+the assertion will fail; and if C<Devel::FindRef> is available the other
+locations will be printed.
+
+=cut
+
+sub assert_oneref
+{
+   my $object = shift;
+   weaken $object;
+
+   my $refcount = refcount( $object );
+   return if $refcount == 1;
+
+   my $message = Carp::shortmess( "Expected $object to have only one reference, found $refcount" );
+
+   if( eval { require Devel::FindRef } ) {
+      my $track = Devel::FindRef::track( $object );
+      die "$message\n$track\n";
+   }
+   else {
+      die $message;
+   }
 }
 
 =head1 COMPARISON WITH SvREFCNT
@@ -70,26 +116,26 @@ Consider the following example program:
 
  use Devel::Peek qw( SvREFCNT );
  use Devel::Refcount qw( refcount );
- 
+
  sub printcount
  {
     my $name = shift;
- 
+
     printf "%30s has SvREFCNT=%d, refcount=%d\n",
-       $name, SvREFCNT($_[0]), refcount($_[0]);
+       $name, SvREFCNT( $_[0] ), refcount( $_[0] );
  }
- 
+
  my $var = [];
 
  printcount 'Initially, $var', $var;
- 
+
  my $othervar = $var;
 
  printcount 'Before CODE ref, $var', $var;
  printcount '$othervar', $othervar;
- 
+
  my $code = sub { undef $var };
- 
+
  printcount 'After CODE ref, $var', $var;
  printcount '$othervar', $othervar;
 

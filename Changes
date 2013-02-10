@@ -1,5 +1,8 @@
 Revision history for Devel-Refcount
 
+0.10    CHANGES:
+         * Added assert_oneref()
+
 0.09    CHANGES:
          * Use Test::Fatal instead of Test::Exception
          * Provide fallback PP implementation using B

@@ -12,4 +12,6 @@ t/01refs.t
 t/02objects.t
 t/03fail.t
 t/04pp.t
+t/05assert.t
 t/99pod.t
+META.json
